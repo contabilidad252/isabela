@@ -1,119 +1,382 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¡Feliz Cumpleaños, Isabela! 🚀🎂</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    @keyframes floatParticle {
-      0% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
-      50% { transform: translateY(-15px) rotate(180deg); opacity: 1; }
-      100% { transform: translateY(0px) rotate(360deg); opacity: 0.8; }
+    :root {
+      --bg-color: #0d1117;
+      --card-bg: rgba(22, 27, 34, 0.85);
+      --border-color: rgba(48, 54, 61, 0.8);
+      --accent-cyan: #58a6ff;
+      --accent-purple: #bc8cff;
+      --accent-green: #7ee787;
+      --accent-pink: #ff7b72;
+      --accent-yellow: #f1e05a;
+      --text-main: #c9d1d9;
+      --text-title: #f0f6fc;
+      --font-code: 'Fira Code', monospace;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
     }
-    .floating { animation: floatParticle 4s ease-in-out infinite; }
-    .floating-delay { animation: floatParticle 5s ease-in-out infinite 1.5s; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-color);
+      background-image: 
+        radial-gradient(circle at 20% 15%, rgba(88, 166, 255, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(188, 140, 255, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(126, 231, 135, 0.05) 0%, transparent 60%);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .bg-particle {
+      position: absolute;
+      user-select: none;
+      pointer-events: none;
+      font-family: var(--font-code);
+      opacity: 0.15;
+      animation: floatUp 14s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      20% { opacity: 0.25; }
+      80% { opacity: 0.25; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    .container {
+      width: 100%;
+      max-width: 760px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .ide-window {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(88, 166, 255, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .window-header {
+      background: rgba(13, 17, 23, 0.9);
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .window-controls { display: flex; gap: 8px; }
+    .control-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+    .dot-close { background: #ff5f56; }
+    .dot-min { background: #ffbd2e; }
+    .dot-max { background: #27c93f; }
+
+    .tab {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-bottom: none;
+      padding: 6px 14px;
+      border-radius: 6px 6px 0 0;
+      font-family: var(--font-code);
+      font-size: 0.85rem;
+      color: var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tag-badge {
+      font-family: var(--font-code);
+      font-size: 0.75rem;
+      background: rgba(126, 231, 135, 0.15);
+      color: var(--accent-green);
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(126, 231, 135, 0.3);
+    }
+
+    .window-body { padding: 28px 32px; }
+
+    .hero-greeting { text-align: center; margin-bottom: 24px; }
+    .badge-top {
+      display: inline-block;
+      font-family: var(--font-code);
+      font-size: 0.8rem;
+      background: linear-gradient(90deg, rgba(88, 166, 255, 0.15), rgba(188, 140, 255, 0.15));
+      color: var(--accent-purple);
+      padding: 6px 16px;
+      border-radius: 30px;
+      border: 1px solid rgba(188, 140, 255, 0.3);
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .hero-greeting h1 {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--text-title);
+      margin-bottom: 6px;
+      background: linear-gradient(135deg, #ffffff 0%, #c9d1d9 60%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-greeting p { font-size: 1.05rem; color: #8b949e; }
+
+    .code-editor {
+      background: #090d13;
+      border: 1px solid rgba(48, 54, 61, 0.6);
+      border-radius: 10px;
+      padding: 20px;
+      font-family: var(--font-code);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      margin-bottom: 26px;
+    }
+
+    .kw { color: #ff7b72; font-weight: bold; }
+    .fn { color: #d2a8ff; }
+    .str { color: #a5d6ff; }
+    .prop { color: #79c0ff; }
+    .num { color: #7ee787; }
+    .cm { color: #8b949e; font-style: italic; }
+    .obj { color: #ffa657; }
+
+    .wishes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .wish-card {
+      background: rgba(13, 17, 23, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      transition: all 0.25s ease;
+    }
+
+    .wish-card:hover {
+      border-color: var(--accent-purple);
+      background: rgba(188, 140, 255, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .wish-icon { font-size: 1.6rem; margin-bottom: 8px; display: inline-block; }
+    .wish-title { font-weight: 700; color: var(--text-title); font-size: 0.95rem; margin-bottom: 4px; }
+    .wish-desc { font-size: 0.83rem; color: #8b949e; line-height: 1.4; }
+
+    .message-box {
+      background: linear-gradient(135deg, rgba(88, 166, 255, 0.08) 0%, rgba(188, 140, 255, 0.08) 100%);
+      border-left: 4px solid var(--accent-purple);
+      border-radius: 0 10px 10px 0;
+      padding: 18px 20px;
+      margin-bottom: 26px;
+      font-size: 0.98rem;
+      line-height: 1.6;
+      color: #e6edf3;
+    }
+
+    .message-box strong { color: var(--accent-green); }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #238636 0%, #2ea043 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(35, 134, 54, 0.4);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #2ea043 0%, #3fb950 100%);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(33, 38, 45, 0.9);
+      color: var(--text-title);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(48, 54, 61, 0.9);
+      border-color: #8b949e;
+      transform: translateY(-2px);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #1f6feb;
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease;
+      z-index: 100;
+    }
+
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    footer {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #6e7681;
+      font-family: var(--font-code);
+    }
+
+    #confetti-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 99;
+    }
   </style>
 </head>
-<body class="bg-transparent text-[var(--foreground)] antialiased p-2">
-  <canvas id="confetti-canvas" class="fixed inset-0 pointer-events-none z-50 w-full h-full"></canvas>
+<body>
+  <canvas id="confetti-canvas"></canvas>
 
-  <div class="relative max-w-xl mx-auto bg-slate-900/95 text-slate-100 border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-xl">
-    
-    <!-- Top Bar estilo Mac / IDE -->
-    <div class="bg-slate-950/80 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
-        <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
-        <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
-        <span class="ml-2 text-xs font-mono text-cyan-400 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700">🎂 isabela_birthday.ts</span>
+  <div class="bg-particle" style="left: 10%;">&lt;Isabela.LevelUp /&gt;</div>
+  <div class="bg-particle" style="left: 75%; animation-delay: 4s;">npm run celebrate</div>
+  <div class="bg-particle" style="left: 45%; animation-delay: 8s;">return Infinity.happiness;</div>
+
+  <div class="container">
+    <div class="ide-window">
+      <div class="window-header">
+        <div class="window-controls">
+          <span class="control-dot dot-close"></span>
+          <span class="control-dot dot-min"></span>
+          <span class="control-dot dot-max"></span>
+        </div>
+        <div class="tab"><span>🎂</span> isabela_birthday.ts</div>
+        <div class="tag-badge">● v2026.release</div>
       </div>
-      <span class="text-[11px] font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-800/50 px-2 py-0.5 rounded-full">● v2026.release</span>
+
+      <div class="window-body">
+        <div class="hero-greeting">
+          <div class="badge-top">&lt; HappyBirthday &gt;</div>
+          <h1>¡Feliz Cumpleaños, Isabela! ✨</h1>
+          <p>Compilando un nuevo año lleno de éxitos, felicidad y código limpio.</p>
+        </div>
+
+        <div class="code-editor">
+          <div><span class="cm">// Declaración de la crack del día 🌟</span></div>
+          <div><span class="kw">interface</span> <span class="obj">DevCelebration</span> {</div>
+          <div>&nbsp;&nbsp;<span class="prop">name</span>: <span class="str">'Isabela'</span>;</div>
+          <div>&nbsp;&nbsp;<span class="prop">role</span>: <span class="str">'Genia del Código &amp; Gran Amiga'</span>;</div>
+          <div>&nbsp;&nbsp;<span class="prop">newLevel</span>: <span class="str">'Unlocked 🚀'</span>;</div>
+          <div>&nbsp;&nbsp;<span class="prop">bugsToday</span>: <span class="num">0</span>;</div>
+          <div>}</div>
+          <br />
+          <div><span class="kw">const</span> <span class="fn">celebrateBirthday</span> = (): <span class="obj">DevCelebration</span> =&gt; {</div>
+          <div>&nbsp;&nbsp;<span class="kw">return</span> {</div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">coffee</span>: <span class="str">'Infinito ☕'</span>,</div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">success</span>: <span class="kw">await</span> <span class="fn">unlockDreams</span>(),</div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">status</span>: <span class="str">'¡Pásala increíble! 🥳🎉'</span></div>
+          <div>&nbsp;&nbsp;};</div>
+          <div>};</div>
+        </div>
+
+        <div class="wishes-grid">
+          <div class="wish-card">
+            <span class="wish-icon">🚀</span>
+            <h3 class="wish-title">0 Errores en Prod</h3>
+            <p class="wish-desc">Que tus deploys siempre salgan en verde a la primera y sin trasnochos.</p>
+          </div>
+          <div class="wish-card">
+            <span class="wish-icon">💡</span>
+            <h3 class="wish-title">Proyectos Épicos</h3>
+            <p class="wish-desc">Mucho crecimiento profesional, metas cumplidas y retos que te inspiren.</p>
+          </div>
+          <div class="wish-card">
+            <span class="wish-icon">☕</span>
+            <h3 class="wish-title">Energía Ilimitada</h3>
+            <p class="wish-desc">Que nunca falte el buen café, las risas y la mejor compañía para celebrar.</p>
+          </div>
+        </div>
+
+        <div class="message-box">
+          💬 <strong>Para Isa:</strong> Que este nuevo año de vida venga cargado de salud, bendiciones, mucha alegría y momentos memorables. Gracias por ser una persona y desarrolladora tan brillante. <strong>¡Te deseo lo mejor de lo mejor hoy y siempre! 🎉</strong>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" onclick="launchCelebration()">
+            <span>🚀</span> ¡Ejecutar Celebración! (Run)
+          </button>
+          <button class="btn btn-secondary" onclick="sendCoffee()">
+            <span>☕</span> Invitar Café Virtual (<span id="coffee-count">0</span>)
+          </button>
+        </div>
+      </div>
     </div>
 
-    <div class="p-6 space-y-4">
-      
-      <!-- Hero Header -->
-      <div class="text-center space-y-1">
-        <div class="inline-block text-xs font-mono font-semibold px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300">
-          &lt;LevelUp /&gt;
-        </div>
-        <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-200 to-purple-300">
-          ¡Feliz Cumpleaños, Isabela! 🚀
-        </h1>
-        <p class="text-sm text-slate-400">
-          Compilando un nuevo año lleno de éxitos, proyectos brutales y mucho código limpio.
-        </p>
-      </div>
-
-      <!-- Code Box -->
-      <div class="bg-black/60 border border-slate-800 rounded-xl p-3.5 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto text-slate-300 shadow-inner">
-        <div><span class="text-slate-500">// La mejor desarrolladora 🌟</span></div>
-        <div><span class="text-pink-400 font-bold">const</span> <span class="text-purple-300 font-semibold">isabela</span> = {</div>
-        <div class="pl-4"><span class="text-cyan-400">status</span>: <span class="text-emerald-300">'Cumpliendo metas &amp; años 🎉'</span>,</div>
-        <div class="pl-4"><span class="text-cyan-400">bugsToday</span>: <span class="text-amber-400 font-bold">0</span>,</div>
-        <div class="pl-4"><span class="text-cyan-400">coffeeLevel</span>: <span class="text-emerald-300">'100% ☕'</span>,</div>
-        <div class="pl-4"><span class="text-cyan-400">wishes</span>: [<span class="text-emerald-300">'Salud'</span>, <span class="text-emerald-300">'Éxito'</span>, <span class="text-emerald-300">'Felicidad Infinita'</span>]</div>
-        <div>};</div>
-      </div>
-
-      <!-- Wishes Grid -->
-      <div class="grid grid-cols-3 gap-2.5 text-center">
-        <div class="bg-slate-800/40 border border-slate-700/50 rounded-xl p-3 hover:border-cyan-500/50 transition duration-200">
-          <div class="text-xl mb-1">🚀</div>
-          <div class="text-xs font-bold text-slate-200">Deploys Limpios</div>
-          <div class="text-[11px] text-slate-400 mt-0.5">0 errores en producción</div>
-        </div>
-        <div class="bg-slate-800/40 border border-slate-700/50 rounded-xl p-3 hover:border-purple-500/50 transition duration-200">
-          <div class="text-xl mb-1">💡</div>
-          <div class="text-xs font-bold text-slate-200">Grandes Logros</div>
-          <div class="text-[11px] text-slate-400 mt-0.5">Metas cumplidas al 100%</div>
-        </div>
-        <div class="bg-slate-800/40 border border-slate-700/50 rounded-xl p-3 hover:border-amber-500/50 transition duration-200">
-          <div class="text-xl mb-1">☕</div>
-          <div class="text-xs font-bold text-slate-200">Buena Vibra</div>
-          <div class="text-[11px] text-slate-400 mt-0.5">Y café ilimitado</div>
-        </div>
-      </div>
-
-      <!-- Dedication Box -->
-      <div class="bg-gradient-to-r from-cyan-950/30 via-purple-950/30 to-pink-950/20 border-l-4 border-purple-500 rounded-r-xl p-3.5 text-xs sm:text-sm text-slate-200 leading-relaxed">
-        💬 <strong class="text-cyan-300">Querida Isa:</strong> Que este nuevo año de vida venga cargado de bendiciones, salud, felicidad y momentos increíbles. Eres una crack tanto en el código como persona. <strong>¡Te deseo lo mejor de lo mejor hoy y siempre! 🎉🥳</strong>
-      </div>
-
-      <!-- Interactive Actions -->
-      <div class="flex flex-wrap items-center justify-center gap-3 pt-1">
-        <button onclick="triggerConfetti()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-green-500 hover:from-emerald-500 hover:to-green-400 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-emerald-900/40 transform active:scale-95 transition flex items-center gap-2 cursor-pointer">
-          <span>🎉</span> ¡Lanzar Celebración!
-        </button>
-        <button onclick="addCoffee()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200 font-semibold text-xs sm:text-sm transform active:scale-95 transition flex items-center gap-2 cursor-pointer">
-          <span>☕</span> Café Virtual (<span id="coffee-count" class="text-amber-400 font-bold">0</span>)
-        </button>
-      </div>
-
-    </div>
-
-    <!-- Footer -->
-    <div class="text-center py-2.5 bg-slate-950/90 border-t border-slate-800/80 text-[11px] font-mono text-slate-500">
-      git commit -m "Feliz Cumple Isa ❤️" 🚀
-    </div>
+    <footer>
+      git commit -m "Feliz cumple Isabela ❤️" &nbsp;|&nbsp; Built with love
+    </footer>
   </div>
 
-  <!-- Confetti Script & Sound -->
+  <div id="toast" class="toast">☕ ¡Café virtual enviado a Isabela!</div>
+
   <script>
-    function playBeep() {
+    function playChime() {
       try {
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        const freqs = [523.25, 659.25, 783.99, 1046.50];
-        freqs.forEach((f, i) => {
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, idx) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
           osc.type = 'triangle';
-          osc.frequency.setValueAtTime(f, ctx.currentTime + i * 0.08);
-          gain.gain.setValueAtTime(0.08, ctx.currentTime + i * 0.08);
-          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.08 + 0.3);
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.1);
+          gain.gain.setValueAtTime(0.1, audioCtx.currentTime + idx * 0.1);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + idx * 0.1 + 0.35);
           osc.connect(gain);
-          gain.connect(ctx.destination);
-          osc.start(ctx.currentTime + i * 0.08);
-          osc.stop(ctx.currentTime + i * 0.08 + 0.35);
+          gain.connect(audioCtx.destination);
+          osc.start(audioCtx.currentTime + idx * 0.1);
+          osc.stop(audioCtx.currentTime + idx * 0.1 + 0.4);
         });
       } catch (e) {}
     }
@@ -121,79 +384,79 @@
     const canvas = document.getElementById('confetti-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
-    let animId = null;
+    let animationId = null;
 
-    function resize() {
+    function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
-    window.addEventListener('resize', resize);
-    resize();
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
     class Particle {
       constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.size = Math.random() * 7 + 4;
-        this.speedX = (Math.random() - 0.5) * 12;
-        this.speedY = Math.random() * -12 - 5;
-        this.gravity = 0.4;
-        this.colors = ['#ff7b72', '#7ee787', '#58a6ff', '#bc8cff', '#f1e05a', '#ffffff', '#ec4899'];
-        this.color = this.colors[Math.floor(Math.random() * this.colors.length)];
-        this.rot = Math.random() * 360;
-        this.rotSpeed = (Math.random() - 0.5) * 8;
-        this.alpha = 1;
+        this.size = Math.random() * 8 + 4;
+        this.speedX = (Math.random() - 0.5) * 14;
+        this.speedY = Math.random() * -14 - 6;
+        this.gravity = 0.45;
+        this.color = ['#ff7b72', '#7ee787', '#58a6ff', '#bc8cff', '#f1e05a', '#ffffff'][Math.floor(Math.random() * 6)];
+        this.rotation = Math.random() * 360;
+        this.rotSpeed = (Math.random() - 0.5) * 10;
+        this.opacity = 1;
       }
       update() {
         this.speedY += this.gravity;
         this.x += this.speedX;
         this.y += this.speedY;
-        this.rot += this.rotSpeed;
-        this.alpha -= 0.012;
+        this.rotation += this.rotSpeed;
+        this.opacity -= 0.009;
       }
       draw() {
         ctx.save();
         ctx.translate(this.x, this.y);
-        ctx.rotate((this.rot * Math.PI) / 180);
-        ctx.globalAlpha = Math.max(0, this.alpha);
+        ctx.rotate((this.rotation * Math.PI) / 180);
+        ctx.globalAlpha = Math.max(0, this.opacity);
         ctx.fillStyle = this.color;
         ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
         ctx.restore();
       }
     }
 
-    function triggerConfetti() {
-      playBeep();
-      const cx = window.innerWidth / 2;
-      const cy = window.innerHeight * 0.4;
-      for (let i = 0; i < 90; i++) {
-        particles.push(new Particle(cx + (Math.random() - 0.5) * 160, cy));
+    function launchCelebration() {
+      playChime();
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      for (let i = 0; i < 120; i++) {
+        particles.push(new Particle(centerX + (Math.random() - 0.5) * 200, centerY));
       }
-      if (!animId) loop();
+      if (!animationId) animateParticles();
     }
 
-    function loop() {
+    function animateParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles = particles.filter(p => p.alpha > 0 && p.y < canvas.height + 40);
+      particles = particles.filter(p => p.opacity > 0 && p.y < canvas.height + 50);
       particles.forEach(p => { p.update(); p.draw(); });
       if (particles.length > 0) {
-        animId = requestAnimationFrame(loop);
+        animationId = requestAnimationFrame(animateParticles);
       } else {
-        animId = null;
+        animationId = null;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
       }
     }
 
     let coffees = 0;
-    function addCoffee() {
+    function sendCoffee() {
       coffees++;
       document.getElementById('coffee-count').textContent = coffees;
-      triggerConfetti();
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+      launchCelebration();
     }
 
-    window.addEventListener('load', () => {
-      setTimeout(triggerConfetti, 400);
-    });
+    window.addEventListener('load', () => setTimeout(launchCelebration, 500));
   </script>
 </body>
 </html>
